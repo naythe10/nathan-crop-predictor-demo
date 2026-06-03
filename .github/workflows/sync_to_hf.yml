@@ -21,4 +21,4 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          hf upload . --repo-type=space --repo-id=its-naythe/soil-crop-analyser --private
+          huggingface-cli upload its-naythe/soil-crop-analyser . . --repo-type space
