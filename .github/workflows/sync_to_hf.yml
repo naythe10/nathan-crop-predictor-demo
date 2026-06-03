@@ -15,10 +15,10 @@ jobs:
           fetch-depth: 0
 
       - name: Install huggingface-hub
-        run: pip install huggingface-hub
+        run: pip install -U "huggingface_hub[cli]"
 
       - name: Push to Hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          huggingface-cli upload its-naythe/soil-crop-analyser . . --repo-type space
+          hf upload its-naythe/soil-crop-analyser . . --repo-type space
