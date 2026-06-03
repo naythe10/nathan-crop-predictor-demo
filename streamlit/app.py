@@ -130,7 +130,7 @@ if user_input:= st.chat_input("Reply to agent"):
 
 #-- CALLING THE LLM
 with st.chat_message("assistant"):
-    response= client.chat.completions.create(model= "llama3-70b-8192", messages= st.session_state.messages)
+    response= client.chat.completions.create(model= "gemma2-9b-it", messages= st.session_state.messages)
     reply= response.choices[0].message.content
 
     #-- PARSING JSON
