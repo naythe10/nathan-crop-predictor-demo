@@ -18,4 +18,7 @@ jobs:
       - name: Push to Hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push --force https://its_naythe:$HF_TOKEN@huggingface.co/spaces/its-naythe/soil-crop-analyser main
+        run: |
+          git remote add hf https://its_naythe:$HF_TOKEN@huggingface.co/spaces/its-naythe/soil-crop-analyser
+          git lfs push --all hf main
+          git push --force hf main
