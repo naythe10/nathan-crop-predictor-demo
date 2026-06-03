@@ -20,13 +20,12 @@ jobs:
           git config lfs.locksverify false
           git config lfs.allowincompletepush true
 
-      - name: Pull LFS files
-        run: git lfs pull
+      - name: Fetch LFS files
+        run: git lfs fetch --all
 
       - name: Push to Hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           git remote add hf https://its_naythe:$HF_TOKEN@huggingface.co/spaces/its-naythe/soil-crop-analyser
-          git lfs push --all hf main
-          git push --force hf main
+          git push -u hf main
