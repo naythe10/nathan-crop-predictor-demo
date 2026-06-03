@@ -20,5 +20,5 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           git remote add hf https://its_naythe:$HF_TOKEN@huggingface.co/spaces/its-naythe/soil-crop-analyser
-          git lfs push --all hf main
+          git lfs push hf main
           git push --force hf main
