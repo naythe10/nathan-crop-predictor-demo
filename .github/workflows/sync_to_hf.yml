@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Install huggingface-hub
         run: pip install huggingface-hub
@@ -19,4 +21,4 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          hf repo upload its-naythe/soil-crop-analyser . --repo-type=space --private
+          hf upload . --repo-type=space --repo-id=its-naythe/soil-crop-analyser --private
