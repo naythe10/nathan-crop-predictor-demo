@@ -14,7 +14,7 @@ from openai import OpenAI
 #-- ACTIVATING AI KEYS
 API_KEY= st.secrets["GROQ_API_KEY"]
 client= OpenAI(
-    base_url= "https://api.groq.com/openai/",
+    base_url= "https://api.groq.com/openai/v1",
     api_key= API_KEY
 )
 
@@ -130,8 +130,8 @@ if user_input:= st.chat_input("Reply to agent"):
 
 #-- CALLING THE LLM
 with st.chat_message("assistant"):
-    response= client.chat(model= "gemma4:31b-cloud", messages= st.session_state.messages)
-    reply= response.message.content
+    response= client.chat.completions.create(model= "llama3-70b-8192", messages= st.session_state.messages)
+    reply= response.choices[0].message.content
 
     #-- PARSING JSON
     if st.session_state.phase== "gathering":
