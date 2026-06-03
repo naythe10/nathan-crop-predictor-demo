@@ -2,8 +2,8 @@ name: Sync to Hugging Face Spaces
 
 on:
   push:
-    branches: [main] # Runs whenever you push to your main branch
-  workflow_dispatch: # Lets you trigger it manually from GitHub if needed
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
   sync-to-hub:
@@ -13,10 +13,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          lfs: true # CRITICAL: Ensures your large .pkl model files sync correctly!
+          lfs: true
 
       - name: Push to Hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        # SWAP OUT "YOUR_HF_USERNAME" AND "YOUR_SPACE_NAME" WITH YOUR ACTUAL DETAILS BELOW:
         run: git push --force https://its_naythe:$HF_TOKEN@huggingface.co/spaces/its_naythe/its_naythe main
