@@ -1,8 +1,6 @@
-from openpyxl.worksheet import datavalidation
 import streamlit as st
 from xgboost import XGBClassifier
 import joblib
-from ollama import Client
 from pydantic import BaseModel, Field
 import pandas as pd
 import numpy as np
@@ -11,6 +9,14 @@ from json import JSONDecodeError
 import re
 import time
 import os
+from openai import OpenAI
+
+#-- ACTIVATING AI KEYS
+API_KEY= st.secrets("GROQ_API_KEY")
+client= OpenAI(
+    base_url= "https://api.groq.com/openai/",
+    api_key= API_KEY
+)
 
 #-- CLASS FOR MODEL FEATURES
 class ModelFeatures(BaseModel):
@@ -67,8 +73,6 @@ label_encoder_path= os.path.join(BASE_DIR, "prediction_label_encoder.pkl")
 spatial_mapper_path= os.path.join(BASE_DIR, "knn_spatial_mapper.pkl")
 
 #-- LOADING NECCESSARY ARTIFACTS
-client= Client()
-
 model = joblib.load(model_path)
 altitude_scaler= joblib.load(altitude_scaler_path)
 cluster_encoder= joblib.load(cluster_encoder_path)
