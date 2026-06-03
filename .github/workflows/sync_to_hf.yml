@@ -12,14 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
-          lfs: true
+          fetch-depth: 0
 
       - name: Push to Hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: |
-          git config lfs.allowincompletepush true
-          git remote add hf https://its_naythe:$HF_TOKEN@huggingface.co/spaces/its-naythe/soil-crop-analyser
-          git lfs push hf main
-          git push --force hf main
+        run: git push --force https://its_naythe:$HF_TOKEN@huggingface.co/spaces/its-naythe/soil-crop-analyser main
