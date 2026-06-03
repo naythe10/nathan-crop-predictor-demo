@@ -12,7 +12,7 @@ import os
 from openai import OpenAI
 
 #-- ACTIVATING AI KEYS
-API_KEY= st.secrets("GROQ_API_KEY")
+API_KEY= st.secrets["GROQ_API_KEY"]
 client= OpenAI(
     base_url= "https://api.groq.com/openai/",
     api_key= API_KEY
