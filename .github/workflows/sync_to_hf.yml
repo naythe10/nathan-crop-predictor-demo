@@ -19,4 +19,4 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          huggingface-cli repo sync . --repo-type=space --repo-id=its-naythe/soil-crop-analyser --private
+          hf repo sync . --repo-type=space --repo-id=its-naythe/soil-crop-analyser --private
