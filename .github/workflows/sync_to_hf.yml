@@ -11,21 +11,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          lfs: true
 
-      - name: Configure Git LFS
-        run: |
-          git config lfs.locksverify false
-          git config lfs.allowincompletepush true
-
-      - name: Fetch LFS files
-        run: git lfs fetch --all
+      - name: Install huggingface-hub
+        run: pip install huggingface-hub
 
       - name: Push to Hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git remote add hf https://its_naythe:$HF_TOKEN@huggingface.co/spaces/its-naythe/soil-crop-analyser
-          git push -u hf main
+          huggingface-cli repo sync . --repo-type=space --repo-id=its-naythe/soil-crop-analyser --private
