@@ -19,4 +19,4 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         # SWAP OUT "YOUR_HF_USERNAME" AND "YOUR_SPACE_NAME" WITH YOUR ACTUAL DETAILS BELOW:
-        run: git push --force https://its_naythe:$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@huggingface.co/spaces/its_naythe/its_naythe main
+        run: git push --force https://its_naythe:$HF_TOKEN@huggingface.co/spaces/its_naythe/its_naythe main
