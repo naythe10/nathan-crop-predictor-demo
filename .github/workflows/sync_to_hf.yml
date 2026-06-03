@@ -15,6 +15,11 @@ jobs:
           fetch-depth: 0
           lfs: true
 
+      - name: Configure Git LFS
+        run: |
+          git config lfs.locksverify false
+          git config lfs.allowincompletepush true
+
       - name: Pull LFS files
         run: git lfs pull
 
