@@ -1,3 +1,4 @@
+from openpyxl.worksheet import datavalidation
 import streamlit as st
 from xgboost import XGBClassifier
 import joblib
@@ -9,6 +10,7 @@ import json
 from json import JSONDecodeError
 import re
 import time
+import os
 
 #-- CLASS FOR MODEL FEATURES
 class ModelFeatures(BaseModel):
@@ -55,14 +57,23 @@ def stream_text(text, delay= 0.04):
         yield word + " "
         time.sleep(delay)
 
+#-- TO GET ABSOLUTE PATH
+BASE_DIR= os.path.dirname(os.path.abspath(__file__))
+
+model_path= os.path.join(BASE_DIR, "xgbmodel.pkl")
+altitude_scaler_path= os.path.join(BASE_DIR, "altitude_scaler.pkl")
+cluster_encoder_path= os.path.join(BASE_DIR, "cluster_encoder.pkl")
+label_encoder_path= os.path.join(BASE_DIR, "prediction_label_encoder.pkl")
+spatial_mapper_path= os.path.join(BASE_DIR, "knn_spatial_mapper.pkl")
+
 #-- LOADING NECCESSARY ARTIFACTS
 client= Client()
 
-model = joblib.load("xgbmodel.pkl")
-altitude_scaler= joblib.load("altitude_scaler.pkl")
-cluster_encoder= joblib.load("cluster_encoder.pkl")
-label_encoder= joblib.load("prediction_label_encoder.pkl")
-spatial_mapper= joblib.load("knn_spatial_mapper.pkl")
+model = joblib.load(model_path)
+altitude_scaler= joblib.load(altitude_scaler_path)
+cluster_encoder= joblib.load(cluster_encoder_path)
+label_encoder= joblib.load(label_encoder_path)
+spatial_mapper= joblib.load(spatial_mapper_path)
 
 #-- INITIALISING SESSION STATES
 if "phase" not in st.session_state:
